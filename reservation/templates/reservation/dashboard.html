@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="flex justify-end mb-4">
+  <form method="post" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning">
+      Logout
+    </button>
+  </form>
+</div>
+
+<div class="grid gap-4 md:grid-cols-2">
+
+  <div class="card bg-base-100 shadow">
+    <div class="card-body">
+      <h2 class="card-title">Request Lab</h2>
+      <a href="{% url 'request_lab' %}" class="btn btn-primary">
+        New Request
+      </a>
+    </div>
+  </div>
+
+  <div class="card bg-base-100 shadow">
+    <div class="card-body">
+      <h2 class="card-title">My Reservations</h2>
+
+      {% for r in reservations %}
+        <div class="alert alert-info">
+          {{ r.lab.name }} — {{ r.status }}
+          {% if r.status == 'queued' %}
+            (Queue #{{ r.queue_position }})
+          {% endif %}
+        </div>
+      {% empty %}
+        <p>No reservations yet.</p>
+      {% endfor %}
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex justify-center items-center h-[85vh]">
+  <div class="card bg-base-100 shadow w-96">
+    <div class="card-body">
+      <h2 class="card-title justify-center">Student Registration</h2>
+
+      {% if form.non_field_errors %}
+        <div class="alert alert-error mb-4">
+          {{ form.non_field_errors.0 }}
+        </div>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+
+        <!-- Username Field -->
+        <div class="form-control w-full tooltip" data-tip="Username must be 4-20 characters, letters and numbers only">
+          <label class="label">Username:</label>
+          {{ form.username }}
+          {% if form.username.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.username.errors.0 }}</span>
+            </label>
+          {% endif %}
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-control w-full mt-4 tooltip" data-tip="Password must be at least 8 characters, include a number and a letter">
+          <label class="label">Password:</label>
+          {{ form.password1 }}
+          {% if form.password1.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.password1.errors.0 }}</span>
+            </label>
+          {% endif %}
+        </div>
+
+        <!-- Confirm Password Field -->
+        <div class="form-control w-full mt-4 tooltip" data-tip="Confirm password must match the password">
+          <label class="label">Confirm Password:</label>
+          {{ form.password2 }}
+          {% if form.password2.errors %}
+            <label class="label">
+              <span class="label-text-alt text-error">{{ form.password2.errors.0 }}</span>
+            </label>
+          {% endif %}
+        </div>
+
+        <!-- Register Button -->
+        <div class="flex justify-center mt-4">
+          <button class="btn btn-primary w-full">Register</button>
+        </div>
+      </form>
+
+      <p class="text-center mt-3 text-sm">
+        Already have an account?
+        <a href="{% url 'login' %}" class="link link-primary">Login</a>
+      </p>
+    </div>
+  </div>
+</div>
+{% endblock %}

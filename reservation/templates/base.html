@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+	<link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+	<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+	<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+	<title>Qlab</title>
+</head>
+<body class="bg-base-200">
+
+  <div class="navbar bg-base-100 shadow">
+    <div class="flex-1">
+      <a href="{% url 'dashboard' %}" ><span class="text-xl font-bold">QLab</span></a>
+    </div>
+
+    <!-- Styled calendar icon -->
+    <button class="btn btn-ghost">
+      <a href="{% url 'reservation_schedule' %}" ><i data-lucide="calendar-days" data-size="20"></i></a>
+    </button>
+    
+    <div class="flex-none">
+      {{ request.user.username }}
+    </div>
+  </div>
+
+  <div class="p-6">
+    {% block content %}{% endblock %}
+  </div>
+
+  <script> lucide.createIcons(); </script>
+</body>
+</html>
