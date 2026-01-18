@@ -19,10 +19,12 @@ from django.urls import path, include
 from reservation.views import register
 from django.conf import settings
 from django.conf.urls.static import static
+from django.shortcuts import redirect
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('', lambda request: redirect('dashboard/')),
     path('', include("reservation.urls")),
     path('register/', register, name='register'),
 ]
